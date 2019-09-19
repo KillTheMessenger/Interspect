@@ -20,6 +20,7 @@ class BodyItems extends Component {
         />
       )
     }
+    console.log("props", this.props.modifyBodyItems);
     return (
       <div className="bodyitems">
         {bodyItemComponents}

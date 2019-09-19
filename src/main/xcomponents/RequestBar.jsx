@@ -11,6 +11,7 @@ const RequestBar = ({createBodyFromSource}) => {
 
     const handleChange = (e) => {
         url = e.target.value;
+        // url='https://swapi.co/api/people/1'
         console.log('url from handleChange', url);
     }
 
@@ -61,7 +62,10 @@ const RequestBar = ({createBodyFromSource}) => {
             <Select>
                 <option value='GET'> GET </option>
             </Select>
-            <Input onChange={handleChange}/>
+            <Input 
+            onChange={handleChange} 
+            // value='https://swapi.co/api/people/1'
+            />
             <Button type='submit' value='Submit' variation="positive"> Send </Button>
         </Form>
     )
