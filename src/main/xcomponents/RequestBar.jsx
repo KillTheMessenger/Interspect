@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import Button from './styledComponents/Button';
 import Form from './styledComponents/Form';
