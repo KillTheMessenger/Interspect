@@ -8,6 +8,7 @@ const express = require('express');
 const {router} = require('../src/main/xserver/xroutes/xroutes.js');
 const exApp = express();
 const server = require('http').Server(exApp);
+const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 // require('electron-reload')(__dirname);
 
 
@@ -32,12 +33,10 @@ function createWindow() {
   });
 
   mainWindow.loadURL(isDev ? 'http://localhost:8080' : `file://${__dirname}/../../dist/index.html`);
-
-  // if (isDev) {
-  //   BrowserWindow.addDevToolsExtension(
-  //     path.join(os.homedir(), './Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.6_0'),
-  //   );
-  // }
+  if (isDev) {
+    installExtension(REACT_DEVELOPER_TOOLS);
+    installExtension(REDUX_DEVTOOLS);
+  }
 
   // if (serverIsOn) {
     exApp.use(express.urlencoded({ encoded: true }))

@@ -8,12 +8,17 @@ import BodyItemsContainer from './BodyItemsContainer';
 import * as actions from '../../../thingsToImplement/redux/actions';
 
 class SourcePanel extends Component {
+  handleSourcePanelClick() {
+    if (!this.props.active) {
+      this.props.onClick("source")
+    }
+  }
   render() {
     const { onClick, active } = this.props;
     return (
 
       <StyledPanel
-        onClick={() => { onClick('source'); }}
+        onClick={() => { this.handleSourcePanelClick(); }}
         active={active}
         style={{ cursor: 'pointer' }}
         >

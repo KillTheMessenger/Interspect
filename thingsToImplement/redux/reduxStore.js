@@ -1,5 +1,5 @@
 
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import reducers from './combinedReducers.js';
 // const {setPort, setItemsToSend, setServerOn} = require('../../public/xmainWindow.js');
 import {setURLFilePath} from '../../src/main/xserver/xroutes/xroutes.js';
@@ -20,17 +20,19 @@ import * as types from './actionTypes.js';
 // }
 const getBodyItemURL = store => next => action => {
   if (action.type === types.CREATE_BODY_FROM_SOURCE && action.payload.customRoute) setURLFilePath(action.payload.customRoute);
-  console.log("Got URL", action.payload.customRoute);
+  // console.log("Got URL", action.payload.customRoute);
   return next(action);
 }
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducers,
-  applyMiddleware(
-    // savePort,
-    // getServerStatus,
-    // getItemsToSend,
-    getBodyItemURL
+  composeEnhancers(
+    applyMiddleware(
+      // savePort,
+      // getServerStatus,
+      // getItemsToSend,
+      getBodyItemURL
+    )
   ),
 );
 export default store;

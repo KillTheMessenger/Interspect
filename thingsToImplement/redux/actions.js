@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as types from "./actionTypes.js";
 
 // General Action Creators
@@ -87,6 +86,14 @@ export const moveBodyItem = (id, dest) => ({
         bodyItemId: id,
         destination: dest
     },
+});
+export const openBodyItem = (id) => ({
+    type: types.OPEN_BODY_ITEM_EDITOR,
+    payload: id
+});
+export const closeBodyItem = (id) => ({
+    type: types.CLOSE_BODY_ITEM_EDITOR,
+    payload: id
 });
 // End of BodyItem Action Creators
 
