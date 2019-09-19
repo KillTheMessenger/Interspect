@@ -1,15 +1,13 @@
 /* eslint-disable */
-
 import React, { Component } from 'react';
 // import RequestBar from '../components/RequestBar.jsx';
 import PropTypes from 'prop-types';
 import StyledPanel from './StyledPanel.jsx';
+
 import styled from 'styled-components';
 import FancyModalButton from '../xcomponents/FancyModalButton.jsx'
-import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
-
+import { ModalProvider, BaseModalBackground } from "styled-react-modal";
 // import PerformanceMetrics from '../components/PerformanceMetrics.jsx';
-
 
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${props => props.opacity};
@@ -27,12 +25,9 @@ export default class MockupsPanel extends Component {
         style={{ cursor: 'pointer' }}
         >
         <h1>Mockups</h1>
-
-        {/* heh */}
+        {/* modal */}
         <ModalProvider backgroundComponent={FadingBackground}>
-          <div className="App">
-        <FancyModalButton />
-      </div>
+          <FancyModalButton />
         </ModalProvider>
       </StyledPanel>
     )
