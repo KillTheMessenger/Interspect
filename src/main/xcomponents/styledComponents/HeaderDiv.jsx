@@ -9,7 +9,7 @@ const HeaderDiv = styled.div`
     font-size: 1em;
     //line-height: 1em;
     padding: 0.825em;
-    width: 97%;
+    width: inherited;
 `;
 
 export default HeaderDiv;

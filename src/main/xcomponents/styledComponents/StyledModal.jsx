@@ -3,8 +3,8 @@
 import Modal  from "styled-react-modal";
 
 const StyledModal = Modal.styled`
-  width: 60rem;
-  height: 30rem;
+  width: 800px;
+  height: 400px;
   display: flex;
   flex-direction: row;
   align-items: center;
