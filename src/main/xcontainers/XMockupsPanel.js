@@ -8,12 +8,16 @@ import styled from 'styled-components';
 import FancyModalButton from '../xcomponents/FancyModalButton.jsx'
 import { ModalProvider, BaseModalBackground } from "styled-react-modal";
 // import PerformanceMetrics from '../components/PerformanceMetrics.jsx';
+import BodyItemsContainer from './BodyItemsContainer';
+import styled from 'styled-components';
 
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${props => props.opacity};
   transition: opacity ease 200ms;
 `;
-
+const CollectionTitle = styled.div` 
+  text-align: center;
+`;
 export default class MockupsPanel extends Component {
   render() {
     const { onClick, active } = this.props;
@@ -26,9 +30,19 @@ export default class MockupsPanel extends Component {
         >
         <h1>Mockups</h1>
         {/* modal */}
-        <ModalProvider backgroundComponent={FadingBackground}>
-          <FancyModalButton />
-        </ModalProvider>
+        {active ? (
+          <div>
+            <ModalProvider backgroundComponent={FadingBackground}>
+              <FancyModalButton />
+            </ModalProvider>
+            
+            <CollectionTitle>MOCK SERVER</CollectionTitle>
+            <BodyItemsContainer  collection='HOSTED_ITEMS' />
+            <CollectionTitle>MOCK LIBRARY</CollectionTitle>
+            <BodyItemsContainer  collection='STAGED_ITEMS' />
+          </div>
+
+         ) : null }
       </StyledPanel>
     )
   }
