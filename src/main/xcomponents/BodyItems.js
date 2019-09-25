@@ -6,6 +6,7 @@ import BodyItem from './BodyItem';
 class BodyItems extends Component {
 
   render() {
+    
     // Object.keys(this.props.bodyItems).length
     let bodyItemComponents = [];
     const bodies = this.props.bodyItems;

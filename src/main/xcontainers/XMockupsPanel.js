@@ -5,16 +5,9 @@ import PropTypes from 'prop-types';
 import StyledPanel from './StyledPanel.jsx';
 
 import styled from 'styled-components';
-import FancyModalButton from '../xcomponents/FancyModalButton.jsx'
-import { ModalProvider, BaseModalBackground } from "styled-react-modal";
 // import PerformanceMetrics from '../components/PerformanceMetrics.jsx';
 import BodyItemsContainer from './BodyItemsContainer';
-import styled from 'styled-components';
 
-const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${props => props.opacity};
-  transition: opacity ease 200ms;
-`;
 const CollectionTitle = styled.div` 
   text-align: center;
 `;
@@ -32,9 +25,6 @@ export default class MockupsPanel extends Component {
         {/* modal */}
         {active ? (
           <div>
-            <ModalProvider backgroundComponent={FadingBackground}>
-              <FancyModalButton />
-            </ModalProvider>
             
             <CollectionTitle>MOCK SERVER</CollectionTitle>
             <BodyItemsContainer  collection='HOSTED_ITEMS' />
