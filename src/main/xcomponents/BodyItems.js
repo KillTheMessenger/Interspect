@@ -4,7 +4,16 @@ import BodyItem from './BodyItem';
 // import PropTypes from 'prop-types';
 
 class BodyItems extends Component {
-
+  // TODO: test whether this is neccessary
+  shouldComponentUpdate(nextProps, nextState) {
+    if(
+      Object.keys(nextProps.bodyItems) != Object.keys(this.props.bodyItems)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   render() {
     
     // Object.keys(this.props.bodyItems).length

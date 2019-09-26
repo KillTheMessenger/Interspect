@@ -1,105 +1,125 @@
 /*eslint-disable*/
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import styled from 'styled-components';
 import ReactJson from 'react-json-view';
 import StyledModal from "../xcomponents/styledComponents/StyledModal.jsx";
-import Select from "../xcomponents/styledComponents/ModalSelect.jsx";
-import Input from "../xcomponents/styledComponents/ModelInput.jsx";
+// import Select from "../xcomponents/styledComponents/ModalSelect.jsx";
+// import Input from "../xcomponents/styledComponents/ModelInput.jsx";
+import Select from './styledComponents/Select';
 import HeaderDiv from "../xcomponents/styledComponents/HeaderDiv.jsx";
 import WrapperDiv from "../xcomponents/styledComponents/WrapperDiv.jsx";
 import LeftColumn from "../xcomponents/styledComponents/LeftColumn.jsx";
 import RightColumn from "../xcomponents/styledComponents/RightColumn.jsx";
 import ModalWrapper from "../xcomponents/styledComponents/ModalWrapper";
+import { TiEdit } from "react-icons/ti";
 
-function BodyItemDetails(props) {
-  const styles = {
-    borderRadius: '5px',
-    fontFamily: '\'IBM Plex Mono\', monospace',
-    fontSize: '90%',
-    maxHeight: '250px',
-    overflow: 'auto',
-    margin: '0.75em auto',
-    padding: '1em',
-    border: '1px solid grey',
-  };
-  const [isOpen, setIsOpen] = useState(false);
-  const [opacity, setOpacity] = useState(0);
 
-  function toggleModal(e) {
-    setIsOpen(!isOpen);
+class BodyItemDetails extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {isOpen: false, opacity: 0}
   }
 
-  function afterOpen() {
-    setTimeout(() => {
-      setOpacity(1);
-    }, 10);
+  toggleModal (e) {
+    console.log("toggleModal()");
+    this.setState({isOpen: !this.state.isOpen});
+  }
+  setOpacity (val) {
+    console.log("setOpacity()");
+    this.setState({opacity: val});
   }
 
-  function beforeClose() {
-    return new Promise(resolve => {
-      setOpacity(0);
-      setTimeout(resolve, 200);
-    });
-  }
+  render () {
+    const styles = {
+      borderRadius: '5px',
+      fontFamily: '\'IBM Plex Mono\', monospace',
+      fontSize: '90%',
+      maxHeight: '250px',
+      overflow: 'auto',
+      margin: '0.75em auto',
+      padding: '1em',
+      border: '1px solid grey',
+    };
 
-  const changeObject = (src) => {
-    const customResponse = JSON.stringify(src.updated_src);
-    // modifyBodyItem expects an entire bodyItem
-    const modifiedBodyItem = {
-      ...props.src,
-      customResponse
+    const changeCustomResponse = (src) => {
+      const customResponse = JSON.stringify(src.updated_src);
+      // modifyBodyItem expects an entire bodyItem
+      const modifiedBodyItem = {
+        ...this.props.bodyItem,
+        customResponse
+      }
+      this.props.modifyBodyItem(modifiedBodyItem);
+    };
+
+    const changeMethod = (val) => {
+      const customRoute = val;
+      const modifiedBodyItem = {
+        ...this.props.bodyItem,
+        customRoute
+      }
+      this.props.modifyBodyItem(modifiedBodyItem);
     }
-    console.log(props);
-    props.modifyBodyItem(modifiedBodyItem);
-  };
 
-  return (
-    <div>
-      <button onClick={toggleModal}>Open modal</button>
-      <StyledModal
-        isOpen={isOpen}
-        afterOpen={afterOpen}
-        beforeClose={beforeClose}
-        onBackgroundClick={toggleModal}
-        onEscapeKeydown={toggleModal}
-        opacity={opacity}
-        backgroundProps={{ opacity }}
-      >
-        
-        <ModalWrapper>
-        <HeaderDiv> Source URL </HeaderDiv>      
+    const StyledEditButton = styled(TiEdit)`
+      display: block;
+      color: #aeb4b5;
+      &:hover {
+        color: black;
+      }
+    `
+    return (
+      <div>
+        <StyledEditButton onClick={this.toggleModal.bind(this)}/>
+        <StyledModal
+          isOpen={this.state.isOpen}
+          onBackgroundClick={this.toggleModal.bind(this)}
+          onEscapeKeydown={this.toggleModal.bind(this)}
+          opacity={1}
+          backgroundProps={{ opacity: 1 }}
+        >
+
+          <ModalWrapper>
             <WrapperDiv>
               <LeftColumn>
-                <Input /> 
-                  <Select>
-                    <option value="" hidden>Method</option>
-                    <option value="1">GET</option>
-                    <option value="2">POST</option>
-                    <option value="3">PATCH</option>
-                    <option value="4">DELETE</option>
-                  </Select>
-    
+                <HeaderDiv>
+                  {this.props.bodyItem.sourceRoute ? ("Cloned From: "+this.props.bodyItem.sourceRoute) : null }
+                  {this.props.bodyItem.sourceMethod ? ("Original Method: "+this.props.sourceMethod) : null}
+                </HeaderDiv>
+
+                Method:
+                <Select
+                  defaultValue = {this.props.bodyItem.customMethod ? this.props.bodyItem.customMethod : null}
+                  onChange={(e) => changeMethod(e.target.value)}
+                  name="customMethodSelector"
+                >
+                  <option value="GET">GET</option>
+                  <option value="PUT">PUT</option>
+                  <option value="POST">POST</option>
+                  <option value="PATCH">PATCH</option>
+                  <option value="DELETE">DELETE</option>
+                </Select>
+                {this.props.bodyItem.customRoute}
               </LeftColumn>
 
               <RightColumn>
                 <ReactJson
-                  src={props.src}
+                  src={JSON.parse(this.props.bodyItem.customResponse)}
                   theme='shapeshifter:inverted'
                   iconStyle='circle'
                   style={styles}
                   collapsed={2}
-                  onAdd={(props.collection === "STAGED_ITEMS") ? changeObject : false}
-                  onEdit={(props.collection === "STAGED_ITEMS") ? changeObject : changeObject}
-                  onDelete={(props.collection === "STAGED_ITEMS") ? changeObject : false}
+                  onAdd={changeCustomResponse}
+                  onEdit={changeCustomResponse}
+                  onDelete={changeCustomResponse}
                   enableClipboard={false}
                 />
               </RightColumn>
             </WrapperDiv>
-        </ModalWrapper>
-    
-      </StyledModal>
-    </div>
-  );
-}
+          </ModalWrapper>
 
+        </StyledModal>
+      </div>
+    );
+  }
+}
 export default BodyItemDetails;

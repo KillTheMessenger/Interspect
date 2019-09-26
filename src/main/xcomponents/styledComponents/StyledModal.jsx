@@ -1,4 +1,3 @@
-/* eslint-disable */
 
 import Modal  from "styled-react-modal";
 

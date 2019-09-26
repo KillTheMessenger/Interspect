@@ -4,13 +4,24 @@ import styled from 'styled-components';
 import BodyItemDetails from '../xcomponents/BodyItemDetails.jsx'
 import { ModalProvider, BaseModalBackground } from "styled-react-modal";
 import ReactJson from 'react-json-view';
+import { TiTimes } from 'react-icons/ti';
 
 // import PropTypes from 'prop-types';
 
-class BodyItem extends Component{
+class BodyItem extends Component {
 
   constructor(props){
     super(props)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if(
+      nextProps.bodyItem != this.props.bodyItem
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render () {
@@ -20,7 +31,7 @@ class BodyItem extends Component{
       fontSize: '90%',
       maxHeight: '250px',
       overflow: 'auto',
-      margin: '0.75em auto',
+      margin: '0 auto 0.75em auto',
       padding: '1em',
       border: '1px solid grey',
     };
@@ -70,25 +81,41 @@ class BodyItem extends Component{
         ...bodyItem,
         customResponse
       }
-      console.log(modifiedBodyItem);
       this.props.modifyBodyItem(modifiedBodyItem);
     };
     const bodyItem = this.props.bodyItem;
     const src = JSON.parse(bodyItem.customResponse);
+
+    const StyledBITopButtons = styled.div`
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      font-size: 28px;
+    `;
+    const StyledCloseButton = styled(TiTimes)`
+      font-size: 32px;
+      bottom: -4px;
+      position: relative;
+      color: #aeb4b5;
+      &:hover {
+        color: black;
+      }
+    `
+
     return (
       <ModalProvider backgroundComponent={FadingBackground}>
-        {this.props.collection !== "STAGED_ITEMS" ? null : 
-          (<BodyItemDetails 
-            src={src}
-            modifyBodyItem={this.props.modifyBodyItem}
-            collection={this.props.collection}
-          />)
-        }
-        <Button onClick={()=>{
-          this.props.deleteBodyItem(bodyItem.bodyItemId);
-        }}>
-          <span aria-hidden="true">&times;</span>
-        </Button>
+        <StyledBITopButtons>
+          {this.props.collection !== "STAGED_ITEMS" ? null : 
+            (<BodyItemDetails 
+              bodyItem={bodyItem}
+              modifyBodyItem={this.props.modifyBodyItem}
+              collection={this.props.collection}
+            />)
+          }
+          <StyledCloseButton onClick={()=>{
+            this.props.deleteBodyItem(bodyItem.bodyItemId);
+          }}/>
+        </StyledBITopButtons>
         <ReactJson
           src={src}
           theme='shapeshifter:inverted'

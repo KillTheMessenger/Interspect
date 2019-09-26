@@ -36,7 +36,7 @@ function createWindow() {
 
   if (isDev) {
     BrowserWindow.addDevToolsExtension(
-      path.join(os.homedir(), './Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.6_0'),
+      path.join(os.homedir(), './Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.1.0_0'),
     );
   }
   mainWindow.on('closed', () => {
