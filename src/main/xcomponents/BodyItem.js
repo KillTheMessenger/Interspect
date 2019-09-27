@@ -23,7 +23,21 @@ class BodyItem extends Component {
       return false;
     }
   }
-
+  componentWillMount(){
+    console.log("bodyItem componentWillMount()");
+  }
+  componentWillUpdate(){
+    console.log("bodyItem componentWillUpdate()");
+  }
+  componentDidCatch(){
+    console.log("bodyItem componentDidCatch()")
+  }
+  componentWillUnmount(){
+      console.log("bodyItem componentWillUnmount()")
+  }
+  componentWillReceiveProps(){
+    console.log("bodyItem componentWillReceiveProps()")
+  }
   render () {
     const styles = {
       borderRadius: '5px',
@@ -39,7 +53,7 @@ class BodyItem extends Component {
       <Button
         variation='positive'
         enabled
-        onClick={() => { 
+        onClick={() => {
           this.props.moveBodyItem(bodyItem.bodyItemId, "STAGED_ITEMS");
         }}
       >
@@ -105,8 +119,8 @@ class BodyItem extends Component {
     return (
       <ModalProvider backgroundComponent={FadingBackground}>
         <StyledBITopButtons>
-          {this.props.collection !== "STAGED_ITEMS" ? null : 
-            (<BodyItemDetails 
+          {this.props.collection !== "STAGED_ITEMS" ? null :
+            (<BodyItemDetails
               bodyItem={bodyItem}
               modifyBodyItem={this.props.modifyBodyItem}
               collection={this.props.collection}
@@ -132,7 +146,7 @@ class BodyItem extends Component {
         {this.props.collection === "STAGED_ITEMS" ? addToServerButton : null}
         {this.props.collection === "HOSTED_ITEMS" ? removeFromServerButton : null}
       </ModalProvider>
-    )  
+    )
   }
 };
 

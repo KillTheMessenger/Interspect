@@ -17,12 +17,45 @@ import { TiEdit } from "react-icons/ti";
 class BodyItemDetails extends Component {
   constructor(props) {
     super(props)
+    console.log("this.state", this.state);
     this.state = {isOpen: false, opacity: 0}
+    console.log("this.state", this.state);
   }
-
+  componentWillMount(){
+    console.log("BIDetails componentWillMount()");
+  }
+  componentWillUpdate(){
+    console.log("BIDetails componentWillUpdate()");
+  }
+  componentDidCatch(){
+    console.log("BIDetails componentDidCatch()")
+  }
+  componentWillUnmount(){
+      console.log("BIDetails componentWillUnmount()")
+  }
+  componentWillReceiveProps(){
+    console.log("BIDetails componentWillReceiveProps()")
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("should details component update()");
+    console.log("this.state", this.state);
+    console.log("nextState", nextState);
+    if(
+      nextState.isOpen != this.state.isOpen
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   toggleModal (e) {
     console.log("toggleModal()");
-    this.setState({isOpen: !this.state.isOpen});
+    if (this.state.isOpen){
+      this.setState({isOpen: !this.state.isOpen});
+      this.forceUpdate();
+    } else {
+      this.setState({isOpen: !this.state.isOpen});
+    }
   }
   setOpacity (val) {
     console.log("setOpacity()");
@@ -51,12 +84,18 @@ class BodyItemDetails extends Component {
       this.props.modifyBodyItem(modifiedBodyItem);
     };
 
-    const changeMethod = (val) => {
-      const customRoute = val;
+    const changeMethod = (e) => {
+      e.preventDefault();
+      const val = e.target.value;
+      const customMethod = val;
+
       const modifiedBodyItem = {
         ...this.props.bodyItem,
-        customRoute
+        customMethod
       }
+      console.log("val: ", val);
+      console.log("modifiedBodyItem: ", modifiedBodyItem);
+      console.log("this.props.bodyItem: ", this.props.bodyItem);
       this.props.modifyBodyItem(modifiedBodyItem);
     }
 
@@ -83,13 +122,13 @@ class BodyItemDetails extends Component {
               <LeftColumn>
                 <HeaderDiv>
                   {this.props.bodyItem.sourceRoute ? ("Cloned From: "+this.props.bodyItem.sourceRoute) : null }
-                  {this.props.bodyItem.sourceMethod ? ("Original Method: "+this.props.sourceMethod) : null}
+                  {this.props.bodyItem.sourceMethod ? ("Original Method: "+this.props.bodyItem.sourceMethod) : null}
                 </HeaderDiv>
 
                 Method:
                 <Select
                   defaultValue = {this.props.bodyItem.customMethod ? this.props.bodyItem.customMethod : null}
-                  onChange={(e) => changeMethod(e.target.value)}
+                  onChange={(e) => changeMethod(e)}
                   name="customMethodSelector"
                 >
                   <option value="GET">GET</option>

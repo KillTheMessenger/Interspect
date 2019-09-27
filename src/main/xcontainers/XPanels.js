@@ -49,12 +49,12 @@ class XPanels extends Component {
           active={this.props.source_active}
           onClick={this.props.activatePanel}
         />
-  
+
         <XMockupsPanel
           active={this.props.mockups_active}
           onClick={this.props.activatePanel}
         />
-  
+
         <XDestinationPanel
           active={this.props.destination_active}
           onClick={this.props.activatePanel}

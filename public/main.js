@@ -7,9 +7,18 @@ const bodyParser = require('body-parser');
 const expressApp = require('express')();
 const server = require('http').Server(expressApp);
 const io = require('socket.io')(server);
+const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+
 
 if (isDev) {
   console.log('Running in development');
+  installExtension(REDUX_DEVTOOLS)
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
+
+    installExtension(REACT_DEVELOPER_TOOLS)
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
 } else {
   console.log('Running in production');
 }
@@ -34,11 +43,6 @@ function createWindow() {
 
   mainWindow.loadURL(isDev ? 'http://localhost:8080' : `file://${__dirname}/../dist/index.html`);
 
-  if (isDev) {
-    BrowserWindow.addDevToolsExtension(
-      path.join(os.homedir(), './Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.1.0_0'),
-    );
-  }
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

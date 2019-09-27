@@ -76,7 +76,7 @@ const initialState = {
 };
 
 const bodyItemsReducer = (state = initialState, action) => {
-  const {bodyItems} = state;  
+  const {bodyItems} = state;
   switch (action.type) {
     case types.CREATE_BODY_FROM_SOURCE:
       const newCount = state.itemCount + 1;

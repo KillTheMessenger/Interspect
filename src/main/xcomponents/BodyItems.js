@@ -6,16 +6,36 @@ import BodyItem from './BodyItem';
 class BodyItems extends Component {
   // TODO: test whether this is neccessary
   shouldComponentUpdate(nextProps, nextState) {
+    console.log("nextprops", nextProps);
+    console.log("this.props", this.props);
+    console.log("this", this);
+    console.log("this.state", this.state);
+    console.log("nextState", nextState);
     if(
-      Object.keys(nextProps.bodyItems) != Object.keys(this.props.bodyItems)
+      Object.keys(nextProps.bodyItems).length != Object.keys(this.props.bodyItems).length
     ) {
       return true;
     } else {
       return false;
     }
   }
+  componentWillMount(){
+    console.log("BodyItemS componentWillMount()");
+  }
+  componentWillUpdate(){
+    console.log("BodyItemS componentWillUpdate()");
+  }
+  componentDidCatch(){
+    console.log("BodyItemS componentDidCatch()")
+  }
+  componentWillUnmount(){
+      console.log("BodyItemS componentWillUnmount()")
+  }
+  componentWillReceiveProps(){
+    console.log("BodyItemS componentWillReceiveProps()")
+  }
   render() {
-    
+
     // Object.keys(this.props.bodyItems).length
     let bodyItemComponents = [];
     const bodies = this.props.bodyItems;
