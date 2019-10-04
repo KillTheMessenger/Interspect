@@ -108,7 +108,6 @@ class BodyItem extends Component {
               bodyItem={bodyItem}
               bodyItemId={bodyItem.bodyItemId}
               modifyBodyItem={this.props.modifyBodyItem}
-              collection={this.props.collection}
               openBodyItem = {this.props.openBodyItem}
               closeBodyItem = {this.props.closeBodyItem}
               updateBodyItemMockServer = {this.props.updateBodyItemMockServer}

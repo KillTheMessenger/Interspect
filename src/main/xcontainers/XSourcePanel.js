@@ -18,7 +18,7 @@ class SourcePanel extends Component {
     this.props.toggleRequestType();
   }
   toggleRequestTypeBtn(){
-    const btnText = this.props.requestIsGraphql === false ?  'GRAPHQL' : 'REST';
+    const btnText = this.props.requestIsGraphql === false ?  'Switch to GRAPHQL' : 'Switch to REST';
     return <Button  onClick={ this.handleToggleRequestBtnClick}>{btnText}</Button>
   }
   handleSourcePanelClick() {
@@ -30,8 +30,8 @@ class SourcePanel extends Component {
     const { active } = this.props;
     const RequestBarSelection = this.props.requestIsGraphql ?
 
-    <RequestBarGraphql createBodyFromSource={this.props.createBodyFromSource}/>
-    : <RequestBar createBodyFromSource={this.props.createBodyFromSource}/>
+    <RequestBarGraphql createBodyItem={this.props.createBodyItem}/>
+    : <RequestBar createBodyItem={this.props.createBodyItem}/>
 
     return (
 
@@ -53,7 +53,7 @@ class SourcePanel extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createBodyFromSource: bodyItem => dispatch(actions.createBodyFromSource(bodyItem)),
+    createBodyItem: bodyItem => dispatch(actions.createBodyItem(bodyItem)),
   };
 };
 

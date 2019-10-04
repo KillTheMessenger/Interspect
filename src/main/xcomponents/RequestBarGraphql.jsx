@@ -8,7 +8,7 @@ import Textarea from './styledComponents/Textarea';
 let url = '';
 let val = '';
 
-const RequestBarGraphql = ({createBodyFromSource}) => {
+const RequestBarGraphql = ({createBodyItem}) => {
 
     const handleChange = (e) => {
         url = e.target.value;
@@ -20,8 +20,8 @@ const RequestBarGraphql = ({createBodyFromSource}) => {
 
     const getData = (e) => {
         e.preventDefault();
-        
-        
+
+
               fetch(url, {
                 method: 'POST',
                 headers: {
@@ -34,11 +34,11 @@ const RequestBarGraphql = ({createBodyFromSource}) => {
                 .then(response => {
                   return response.json()
                 })
-  
-          
-    
+
+
+
         .then(response => {
-       
+
             console.log("responze", response);
             const stringifiedData = JSON.stringify(response);
             const newBodyItem = {
@@ -53,16 +53,16 @@ const RequestBarGraphql = ({createBodyFromSource}) => {
                 collection: 'CLONED_ITEMS',
             }
             console.log("NBI: ",newBodyItem)
-            createBodyFromSource(newBodyItem);
+            createBodyItem(newBodyItem);
         }).catch(err=>{
             console.log("err:", err);
-            
+
         })
     }
 
     return (
         <Form onSubmit={getData}>
-            
+
             <Input onChange={handleChange} />
             <Textarea onChange={handleChangeVal}></Textarea>
             <Button type='submit' value='Submit' variation="positive"> Send </Button>

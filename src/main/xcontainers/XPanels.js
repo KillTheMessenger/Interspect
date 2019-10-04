@@ -56,11 +56,6 @@ class XPanels extends Component {
           active={this.props.mockups_active}
           onClick={this.props.activatePanel}
         />
-
-        <XDestinationPanel
-          active={this.props.destination_active}
-          onClick={this.props.activatePanel}
-        />
       </XPanelsWrapper>
     );
   }

@@ -1,10 +1,8 @@
-/*eslint-disable*/
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import styled from 'styled-components';
 import ReactJson from 'react-json-view';
 import StyledModal from "../xcomponents/styledComponents/StyledModal.jsx";
 import Select from './styledComponents/Select';
-import Button from './styledComponents/Button';
 import ItemDetailsArea from "./styledComponents/ItemDetailsArea.jsx";
 import WrapperDiv from "../xcomponents/styledComponents/WrapperDiv.jsx";
 import LeftColumn from "../xcomponents/styledComponents/LeftColumn.jsx";
@@ -18,15 +16,15 @@ class BodyItemDetails extends Component {
     super(props);
     this.state = { routeAreaVal: this.props.bodyItem.customRoute}
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    if(
-      nextProps.bodyItem.editorOpen != this.props.bodyItem.editorOpen
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if(
+  //     nextProps.bodyItem.editorOpen != this.props.bodyItem.editorOpen
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
   toggleModal (e) {
     if (this.props.bodyItem.editorOpen){
       this.props.closeBodyItem(this.props.bodyItem.bodyItemId)
@@ -106,7 +104,6 @@ class BodyItemDetails extends Component {
           opacity={1}
           backgroundProps={{ opacity: 1 }}
         >
-
           <ModalWrapper>
             <WrapperDiv>
               <LeftColumn>

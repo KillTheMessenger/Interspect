@@ -71,8 +71,8 @@ export const deleteTest = (testName) => ({
 // End of Mockups Panel Action Creators
 
 // BodyItem Action Creators
-export const createBodyFromSource = (data) => ({
-  type: types.CREATE_BODY_FROM_SOURCE,
+export const createBodyItem = (data) => ({
+  type: types.CREATE_BODY_ITEM,
   payload: data,
 });
 

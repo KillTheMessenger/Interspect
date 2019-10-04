@@ -6,7 +6,7 @@ import Select from './styledComponents/Select';
 
 let url = '';
 let XMLorJSON = '';
-const RequestBar = ({createBodyFromSource}) => {
+const RequestBar = ({createBodyItem}) => {
 
     const handleChange = (e) => {
         url = e.target.value;
@@ -46,7 +46,7 @@ const RequestBar = ({createBodyFromSource}) => {
                 customResponseType: XMLorJSON,
                 collection: 'CLONED_ITEMS',
             }
-            createBodyFromSource(newBodyItem);
+            createBodyItem(newBodyItem);
         });
     }
 

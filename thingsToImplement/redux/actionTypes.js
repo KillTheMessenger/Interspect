@@ -36,7 +36,7 @@
 
 // Action Types for BodyItems
     // Reducer Action Types
-    export const CREATE_BODY_FROM_SOURCE = "CREATE_BODY_FROM_SOURCE";
+    export const CREATE_BODY_ITEM = "CREATE_BODY_ITEM";
     export const MODIFY_BODY_ITEM = "MODIFY_BODY_ITEM";
     export const DELETE_BODY_ITEM = "DELETE_BODY_ITEM";
     export const MOVE_BODY_ITEM = "MOVE_BODY_ITEM";
