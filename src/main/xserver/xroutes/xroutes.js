@@ -9,11 +9,6 @@ function setURLFilePath(url) {
 
 // Function that dynamically sets routes based on passed in bodyItems object
 // Called when hitting the /gotem route
-// TODO: REQUIREMENTS:
-//ensure existing routes are cleared
-//make new routes for each body item's customRoute, for customMethod
-//customRoute requests from outside server should return 200 status
-//customRoute requests from outside server SHOULD RETURN CUSTOMRESPONSE AS RESPONSE
 
 // This function currently doesn't work
 // const resetRoutes = () => {
@@ -24,23 +19,20 @@ function setURLFilePath(url) {
 //   });
 // }
 
+
 const setDynamicRoutes = (req, res, next) => {
-    const methods = ['get', 'post', 'patch', 'put', 'delete'];
-    const bodyItems = req.body.bodyItems;
+    const {bodyItems} = req.body;
     try {
-        for (let i = 0; i < methods.length; i++) {
-            for (let item in bodyItems) {
-                if (bodyItems[item].customMethod.toLowerCase() === methods[i]) {
-                    router[methods[i]](bodyItems[item].customRoute, (req, res, next) => {
-                        res.locals.response = bodyItems[item].customResponse;
-                        next();
-                    }, handleRequest);
-                }
-            }
+        for (let item in bodyItems) {
+            const {customMethod, customRoute, customResponse} = bodyItems[item];
+            router[customMethod.toLowerCase()](customRoute, (req, res, next) => {
+                res.locals.response = customResponse;
+                next();
+            }, handleRequest);
         }
         next();
-    } catch (error) {
-        res.status(500).send(error).end();
+    } catch (err) {
+        res.status(500).send(err).end();
     }
 }
 
@@ -52,7 +44,7 @@ const handleRequest = (req, res) => {
             res.status(200).send(res.locals.response);
             res.end();
         } else {
-            res.status(400);
+            res.status(404);
             res.end();
         }
     } catch {
