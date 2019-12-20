@@ -23,7 +23,7 @@ import axios from 'axios';
 // }
 
 const initialState = {
-  itemCount: 10,
+  itemCount: 4,
   bodyItems: {
     1: {
       editorOpen: false,
@@ -89,7 +89,9 @@ const initialState = {
 };
 
 const bodyItemsReducer = (state = initialState, action) => {
-  const { bodyItems } = state;
+  // Deep clone of bodyItems:
+  const bodyItems = JSON.parse(JSON.stringify(state.bodyItems))
+
   switch (action.type) {
     case types.OPEN_BODY_ITEM_EDITOR:
       bodyItems[action.payload].editorOpen = true;
@@ -118,7 +120,7 @@ const bodyItemsReducer = (state = initialState, action) => {
         bodyItems
       };
     case types.MODIFY_BODY_ITEM:
-      const id = action.payload.bodyItemId;
+      const id = action.payload.bodyItemId; // 3
       bodyItems[id] = action.payload;
       return {
         ...state,
