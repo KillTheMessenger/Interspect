@@ -15,7 +15,7 @@ The app is split into two, distinct panels:
 ### Source
 This is where you can define a data source that will become the foundation for your data mockups.
 
-![Screenshot of source panel](/assets/screenshots/rest-source.png)
+![Screenshot of source panel](/assets/screenshots/SourcePanel.png)
 
 #### Send a GET request
 If your microservice supports `GET` requests, add your endpoint to the request bar and hit send. You’ll then be able to view the response data, which you can then send over to the Mockups panel. If the response is not what you wanted or you made a mistake, you can easily remove the response by clicking the 'X' sitting at the top right of every response.
