@@ -31,6 +31,8 @@ In the mockups panel, you can create new data scenarios from your source data. T
 #### Editing Data In the Mock Library
 The Mock Library is where all of your response data is stored after saving it from the Source panel. You can edit your data by clicking on the clipboard icon, or delete your data by clicking on the 'X' icon as you please in this section. Upon clicking the clipboard icon, a pop-up will appear where you can edit what's inside the response data, as well as setup a mock request by defining a custom route with a specified method type (i.e. GET, POST, PUT, PATCH, DELETE), and fake response data to be returned depending on whether your mock request was successful or not. 
 
+
+![Screenshot of mock panel with edit mode](/assets/screenshots/mockDataPanel.png)
 ![Screenshot of mock panel with edit mode](/assets/screenshots/edit-modal.png)
 
 #### Making Requests to the Mock Server
