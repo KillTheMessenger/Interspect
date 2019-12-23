@@ -23,7 +23,7 @@ If your microservice supports `GET` requests, add your endpoint to the request b
 #### Accpeted data types
 Interspect works with `JSON`, `XML`, and `GraphQL`-formatted data. For `GraphQL` requests, click the button in the top left corner of the Source panel, and another textbox will appear. This is where you'll write out the schema for your `GraphQL` request. To switch back to REST api requests, simply click the button again.
 
-![Screenshot of source panel with GraphQL setting](/assets/screenshots/graphql-source.png)
+![Screenshot of source panel with GraphQL setting](/assets/screenshots/SourceGQL.png)
 
 ### Mockups
 In the mockups panel, you can create new data scenarios from your source data. There are two sections: a Mock Library and Mock Server.
@@ -33,7 +33,7 @@ The Mock Library is where all of your response data is stored after saving it fr
 
 
 ![Screenshot of mock panel with edit mode](/assets/screenshots/mockDataPanel.png)
-![Screenshot of mock panel with edit mode](/assets/screenshots/edit-modal.png)
+![Screenshot of mock panel with edit mode](/assets/screenshots/MockData.png)
 
 #### Making Requests to the Mock Server
 When you finish editing your data, you can send it to the Mock Server section, where you can test your custom routes that you set up when editing your response data on http://localhost:3000. This can be done by making a request to the route using `curl`, or the `Postman` application. Upon a successful test, you should get the responses that you set up during editing.
